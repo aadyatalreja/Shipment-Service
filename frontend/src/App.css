@@ -1,0 +1,759 @@
+body {
+  background-color: #0a0e17;
+  color: #e6e6e6;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  /* Subtle gradient background */
+  background: linear-gradient(135deg, #0a0e17 0%, #141c26 100%);
+  cursor: default;
+}
+
+/* Particle effect base styling */
+.particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Particle animation - semi-transparent dots */
+.particle-canvas::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.03) 2px, transparent 2px),
+    radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.03) 2px, transparent 2px),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+    radial-gradient(circle at 90% 60%, rgba(255, 255, 255, 0.03) 2px, transparent 2px);
+  background-size: 800px 800px;
+  animation: float-particles 45s linear infinite;
+  opacity: 0.7;
+}
+
+/* Larger particles with different animation */
+.particle-canvas::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.02) 3px, transparent 3px),
+    radial-gradient(circle at 40% 60%, rgba(74, 158, 255, 0.02) 3px, transparent 3px),
+    radial-gradient(circle at 60% 20%, rgba(255, 255, 255, 0.02) 3px, transparent 3px),
+    radial-gradient(circle at 80% 80%, rgba(74, 158, 255, 0.02) 3px, transparent 3px);
+  background-size: 700px 700px;
+  animation: float-particles-alt 30s linear infinite;
+  opacity: 0.7;
+}
+
+/* Mouse follower dot - subtle blue halo that follows cursor */
+body:hover::after {
+  content: "";
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74, 158, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.7;
+  transition: top 1s ease-out, left 1s ease-out;
+  animation: pulse-glow 3s infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+@keyframes float-particles {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 800px 800px;
+  }
+}
+
+@keyframes float-particles-alt {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -700px -700px;
+  }
+}
+
+.App {
+  min-height: 100vh;
+  text-align: center;
+  color: #e6e6e6;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Enhanced title with animated gradient */
+.title {
+  margin: 30px auto 20px;
+  font-size: 32px;
+  font-weight: 600;
+  color: transparent;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  position: relative;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background-image: linear-gradient(90deg, #fff, #4a9eff, #fff);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shine 8s linear infinite;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  text-align: center;
+  width: 100%
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4a9eff, transparent);
+  animation: width-pulse 4s ease infinite;
+}
+
+@keyframes side-line {
+  0% {
+    width: 20px;
+    opacity: 0.6;
+  }
+  100% {
+    width: 40px;
+    opacity: 1;
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #a6b0bc;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  margin-bottom: 25px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated underline for subtitle */
+.subtitle::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(74, 158, 255, 0.5), transparent);
+  transform: translateX(-50%);
+  animation: width-pulse 4s ease infinite;
+}
+
+@keyframes width-pulse {
+  0%, 100% {
+    width: 40px;
+    opacity: 0.5;
+  }
+  50% {
+    width: 100px;
+    opacity: 0.8;
+  }
+}
+
+/* Sophisticated form container with subtle animations */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  padding: 25px;
+  border-radius: 8px;
+  background-color: rgba(13, 25, 36, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid rgba(30, 144, 255, 0.15);
+  transition: box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated highlight effect */
+.form-container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(74, 158, 255, 0.08),
+    transparent 70%
+  );
+  transform-origin: center;
+  animation: container-glow 10s infinite linear;
+  opacity: 0;
+}
+
+@keyframes container-glow {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+.form-container:hover {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-bottom: 1px solid rgba(30, 144, 255, 0.2);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated highlight line */
+.button-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(74, 158, 255, 0.5) 50%, 
+    transparent 100%
+  );
+  animation: slide-through 4s infinite;
+}
+
+@keyframes slide-through {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.connect-wallet-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+p {
+  margin: 5px 0;
+  line-height: 1.6;
+  font-size: 14px;
+  color: #ccd2d8;
+}
+
+/* Enhanced account text box */
+.account-connected-text {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 15px 0;
+  font-size: 0.9rem;
+  color: #ffffff;
+  background-color: rgba(13, 25, 36, 0.7);
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(30, 144, 255, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.account-connected-text::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(74, 158, 255, 0.5);
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0 rgba(74, 158, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(74, 158, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(74, 158, 255, 0);
+  }
+}
+
+.account-connected-text:hover {
+  border-color: rgba(30, 144, 255, 0.5);
+  box-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Enhanced input styling */
+input {
+  border: 1px solid #1e5f8a;
+  border-radius: 4px;
+  background-color: rgba(10, 20, 30, 0.8);
+  color: #e6e6e6;
+  letter-spacing: 0.5px;
+  width: 250px;
+  margin: 10px;
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  position: relative;
+}
+
+input::placeholder {
+  color: rgba(200, 200, 200, 0.5);
+  transition: all 0.3s ease;
+}
+
+input:focus::placeholder {
+  opacity: 0.5;
+  transform: translateX(10px);
+}
+
+input:focus {
+  outline: none;
+  border-color: #4a9eff;
+  box-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Button styling with enhanced animations */
+.internal-button {
+  background: linear-gradient(to bottom, #0c3b5d, #051e30);
+  font-size: 14px;
+  color: #e6e6e6;
+  border: 1px solid #1e5f8a;
+  border-radius: 4px;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.internal-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1),
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.internal-button:hover {
+  background: linear-gradient(to bottom, #0d4572, #062540);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.internal-button:hover::before {
+  opacity: 1;
+  animation: shine-effect 2s infinite;
+}
+
+@keyframes shine-effect {
+  0% {
+    transform: rotate(45deg) translate(-20%, -20%);
+  }
+  100% {
+    transform: rotate(45deg) translate(20%, 20%);
+  }
+}
+
+.internal-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset;
+}
+
+/* Larger wallet connect button with enhanced effects */
+.connect-wallet-button {
+  background: linear-gradient(to bottom, #0c3b5d, #051e30);
+  width: 300px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #e6e6e6;
+  border: 1px solid #1e5f8a;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.connect-wallet-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: button-shine 5s infinite;
+}
+
+@keyframes button-shine {
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.connect-wallet-button:hover {
+  background: linear-gradient(to bottom, #0d4572, #062540);
+  border-color: #4a9eff;
+  box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.connect-wallet-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.action-button {
+  background-color: rgba(10, 20, 30, 0.8);
+  color: #fbfbfb;
+  border: 1px solid #1e5f8a;
+  font-size: 14px;
+  min-width: 150px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-button::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #4a9eff, transparent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: rgba(30, 144, 255, 0.1);
+  border-color: #4a9eff;
+  box-shadow: 0 2px 8px rgba(30, 144, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.action-button:hover::after {
+  transform: scaleX(1);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  padding: 20px;
+  background-color: rgba(13, 25, 36, 0.5);
+  border-radius: 6px;
+  border: 1px solid rgba(30, 144, 255, 0.15);
+  width: 90%;
+  max-width: 600px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Corner decorations */
+.input-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid rgba(74, 158, 255, 0.5);
+  border-left: 2px solid rgba(74, 158, 255, 0.5);
+  animation: corner-pulse 3s infinite alternate;
+}
+
+.input-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid rgba(74, 158, 255, 0.5);
+  border-right: 2px solid rgba(74, 158, 255, 0.5);
+  animation: corner-pulse 3s infinite alternate-reverse;
+}
+
+@keyframes corner-pulse {
+  0% {
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+  }
+  100% {
+    width: 20px;
+    height: 20px;
+    opacity: 0.8;
+  }
+}
+
+.input-container:hover {
+  border-color: rgba(30, 144, 255, 0.3);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+  text-align: left;
+  width: 100%;
+}
+
+li {
+  padding: 10px 15px;
+  margin: 8px 0;
+  border-left: 2px solid #1e5f8a;
+  background-color: rgba(13, 25, 36, 0.7);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: #4a9eff;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
+}
+
+li:hover {
+  border-left-color: transparent;
+  background-color: rgba(30, 144, 255, 0.1);
+  transform: translateX(3px);
+}
+
+li:hover::before {
+  transform: scaleY(1);
+}
+
+.footer-container {
+  display: none; /* Removed as requested */
+}
+
+/* Smooth transitions for all elements */
+* {
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s, color 0.3s, transform 0.3s;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .title {
+    font-size: 28px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  .connect-wallet-button {
+    width: 90%;
+    max-width: 280px;
+  }
+  
+  .form-container {
+    padding: 15px;
+  }
+  
+  .particle-canvas::before,
+  .particle-canvas::after {
+    background-size: 300px 300px, 350px 350px, 400px 400px, 450px 450px;
+  }
+}
+
+/* Subtle page load animation */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.App > * {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.App > *:nth-child(1) { animation-delay: 0.1s; }
+.App > *:nth-child(2) { animation-delay: 0.2s; }
+.App > *:nth-child(3) { animation-delay: 0.3s; }
+.App > *:nth-child(4) { animation-delay: 0.4s; }
+.App > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* CSS-only cursor follower effect for particles */
+body {
+  perspective: 1000px;
+}
+
+.particle-canvas {
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+}
+
+body:hover .particle-canvas {
+  transform: translate3d(var(--mouse-x, 0), var(--mouse-y, 0), 0);
+}
+/* Add these styles to App.css */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #111;
+  border: 2px solid #0f0;
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.3);
+  color: #0f0;
+  animation: glow 1.5s infinite alternate;
+}
+
+.popup-content h3 {
+  margin-top: 0;
+  text-align: center;
+  color: #0f0;
+}
+
+.popup-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background: #222;
+  border: 1px solid #0f0;
+  color: #0f0;
+  border-radius: 4px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.popup-buttons button {
+  padding: 8px 15px;
+}
