@@ -26,7 +26,7 @@ function ShipmentServiceApp() {
   const [shippedOrders, setShippedOrders] = useState([]);
   const [deliveredOrders, setDeliveredOrders] = useState([]);
   const [showOtpPopup, setShowOtpPopup] = useState(false);
-  // const [newOrderNumber, setNewOrderNumber] = useState(0);
+  const [newOrderNumber, setNewOrderNumber] = useState(0);
   const [shipOtp, setShipOtp] = useState("");
   const [showCreateOrder, setShowCreateOrder] = useState(false);
   const [showGetOTP, setShowGetOTP] = useState(false);
@@ -51,7 +51,7 @@ const [owner, setOwner] = useState("");
   // Add the decorative elements effect inside the component
   useEffect(() => {
     // Create and append the decorative elements
-    // const appElement = document.querySelector('.App');
+    const appElement = document.querySelector('.App');
     
     // Add digital noise overlay
     const noiseElement = document.createElement('div');
@@ -109,7 +109,7 @@ const [owner, setOwner] = useState("");
         setAccount(accounts[0]);
         setWeb3(web3Instance);
 
-       // const networkId = await web3Instance.eth.net.getId();
+        const networkId = await web3Instance.eth.net.getId();
         const contractInstance = new web3Instance.eth.Contract(
           ShipmentServiceABI.abi,
           CONTRACT_ADDRESS
@@ -830,16 +830,10 @@ const handleOtpSubmit = async () => {
             <img alt="Github Logo" className="github-logo" src={githubLogo} />
             <a
                 className="footer-text"
-                href={'https://github.com/reethuthota'}
+                href={'https://github.com/aadyatalreja'}
                 target="_blank"
                 rel="noreferrer"
-            >{`@reethuthota`}</a>
-            <a
-                className="footer-text"
-                href={'https://github.com/shreyasrajiv327'}
-                target="_blank"
-                rel="noreferrer"
-            >{`@shreyasrajiv`}</a>
+            >{`@aadyatalreja`}</a>
         </div>
     </div>
   );
