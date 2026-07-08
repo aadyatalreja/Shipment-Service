@@ -82,6 +82,11 @@ This project is a decentralized application (DApp) built on Ethereum blockchain 
 
 3. Access the DApp in your browser at http://localhost:3000.
 
+## Architecture Diagram
+<div align="center">
+<img width="930" height="923" alt="image" src="https://github.com/user-attachments/assets/abe2da85-881a-412b-8ba1-28b094d636d4" />
+</div>
+
 ## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
